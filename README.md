@@ -1,0 +1,2 @@
+# solving_chrome_dinosaur_with_supervised_learning
+Solving chrome dinosaur with supervised learning techniques
