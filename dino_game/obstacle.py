@@ -32,16 +32,17 @@ class MultiObstacle(Sprite):
         self.msks = [from_surface(img) for img in self.imgs]
 
         self.idx = 0
-        self.max_idx = len(self.imgs) * self.TIME_ANIMATION
+        self.m_idx = len(self.imgs) * self.TIME_ANIMATION
 
         self.image = self.imgs[self.idx]
         self.mask  = self.msks[self.idx]
         self.rect  = self.image.get_rect(topleft=(self.WIDTH, y))
 
     def update(self):
-        self.idx = (self.idx + 1) % self.max_idx
+        self.idx = (self.idx + 1) % self.m_idx
         self.image = self.imgs[self.idx // self.TIME_ANIMATION]
         self.mask  = self.msks[self.idx // self.TIME_ANIMATION]
+        self.rect  = self.image.get_rect(topleft=self.rect.topleft)
 
         self.rect.x -= self.SPEED
         if self.rect.x < -self.rect.width:

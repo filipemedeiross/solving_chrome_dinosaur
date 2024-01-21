@@ -8,6 +8,10 @@ from .constants import SCREEN_WDTH, SPEED_GAME, \
 
 
 class Cloud:
+    MIN_X = CLOUD_MIN_X
+    MAX_X = CLOUD_MAX_X
+    MIN_Y = CLOUD_MIN_Y
+    MAX_Y = CLOUD_MAX_Y
     WIDTH = SCREEN_WDTH
     SPEED = SPEED_GAME
     PATH_SPRITE = CLOUD_PATH
@@ -21,8 +25,8 @@ class Cloud:
         self.width = self.image.get_width()
 
     def init_coords(self):
-        self.x = randint(CLOUD_MIN_X, CLOUD_MAX_X) + self.WIDTH
-        self.y = randint(CLOUD_MIN_Y, CLOUD_MAX_Y)
+        self.x = randint(self.MIN_X, self.MAX_X) + self.WIDTH
+        self.y = randint(self.MIN_Y, self.MAX_Y)
 
     def update(self):
         self.x -= self.SPEED
