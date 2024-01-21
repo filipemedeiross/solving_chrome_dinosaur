@@ -29,3 +29,15 @@ CLOUD_MAX_X = 1000
 CLOUD_MIN_Y = 50
 CLOUD_MAX_Y = 100
 CLOUD_PATH = 'dino_game/media/cloud.png'
+
+SMALL_CACTUS_Y = 325
+SMALL_CACTUS_PATHS = 'dino_game/media/small_cactus1.png', \
+                     'dino_game/media/small_cactus2.png'
+
+LARGE_CACTUS_Y = 300
+LARGE_CACTUS_PATHS = 'dino_game/media/large_cactus1.png', \
+                     'dino_game/media/large_cactus2.png'
+
+BIRD_Y = 250
+BIRD_PATHS = 'dino_game/media/bird1.png', \
+             'dino_game/media/bird2.png'
