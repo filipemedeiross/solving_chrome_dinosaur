@@ -1,9 +1,9 @@
 from pygame.image import load
-from .constants import SPEED_ANIMATION, BASE_PATH
+from .constants import SPEED_GAME, BASE_PATH
 
 
 class Base:
-    SPEED = SPEED_ANIMATION
+    SPEED = SPEED_GAME
     PATH  = BASE_PATH
 
     def __init__(self, y):
