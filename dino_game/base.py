@@ -16,7 +16,7 @@ class Base:
         self.x0 = 0
         self.x1 = self.width
 
-    def move(self):
+    def update(self):
         self.x0 -= self.SPEED
         self.x1 -= self.SPEED
 
