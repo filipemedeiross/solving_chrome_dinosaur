@@ -1,7 +1,7 @@
 from random import randint
 from pygame.image import load
 from pygame.mask  import from_surface
-from .constants import SCREEN_WDTH, SPEED_GAME, \
+from .constants import SCREEN_WDTH, CLOUD_SPEED, \
                        CLOUD_MIN_X, CLOUD_MAX_X, \
                        CLOUD_MIN_Y, CLOUD_MAX_Y, \
                        CLOUD_PATH
@@ -13,7 +13,7 @@ class Cloud:
     MIN_Y = CLOUD_MIN_Y
     MAX_Y = CLOUD_MAX_Y
     WIDTH = SCREEN_WDTH
-    SPEED = SPEED_GAME
+    SPEED = CLOUD_SPEED
     PATH_SPRITE = CLOUD_PATH
 
     def __init__(self):
