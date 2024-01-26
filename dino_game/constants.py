@@ -1,16 +1,28 @@
 # Defining the constants
 
 # Settings
+DELAY = 2000
+FRAMERATE  = 30
 SPEED_GAME = 20
 SPEED_ANIMATION = 5
 
-# Dimensions
+WHITE = 255, 255, 255
+BLACK = 0, 0, 0
+
+FONT_TYPE = 'freesansbold.ttf'
+FONT_SIZE = 30
+
+DECISION_TREE_PATH = 'dino_game/models/dtc.pkl'
+SVM_LINEAR_PATH    = 'dino_game/models/svm_linear.pkl'
+
+# Dimensions and indent
 SCREEN_WDTH = 1100
 SCREEN_HGHT = 600
+SCREEN_SIZE = SCREEN_WDTH, SCREEN_HGHT
 
-# Dimensions of game elements
-
-# Indent
+TEXT_INDENT = SCREEN_WDTH // 2, SCREEN_HGHT // 3
+SCORE_MAIN_INDENT = SCREEN_WDTH // 2, SCREEN_HGHT // 3 + 50
+SCORE_PLAY_INDENT = 1000, 40
 
 # Constants of the game's classes
 DINO_X = 80
@@ -28,6 +40,7 @@ CLOUD_MIN_X = 800
 CLOUD_MAX_X = 1000
 CLOUD_MIN_Y = 50
 CLOUD_MAX_Y = 100
+CLOUD_SPEED = 15
 CLOUD_PATH = 'dino_game/media/cloud.png'
 
 SMALL_CACTUS_Y = 325
@@ -41,3 +54,9 @@ LARGE_CACTUS_PATHS = 'dino_game/media/large_cactus1.png', \
 BIRD_Y = 250
 BIRD_PATHS = 'dino_game/media/bird1.png', \
              'dino_game/media/bird2.png'
+
+BASE_Y = 380
+BASE_PATH = 'dino_game/media/track.png'
+
+GAME_THEME_PATH = 'dino_game/media/sweet_dinosaur.mp3'
+GAME_EFFCT_PATH = 'dino_game/media/game_over.ogg'
