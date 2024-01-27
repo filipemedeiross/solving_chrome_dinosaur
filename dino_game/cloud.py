@@ -18,10 +18,7 @@ class Cloud:
 
     def __init__(self):
         self.init_coords()
-
         self.image = load(self.PATH_SPRITE)
-        self.mask  = from_surface(self.image)
-
         self.width = self.image.get_width()
 
     def init_coords(self):
