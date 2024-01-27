@@ -90,11 +90,11 @@ class Dinosaur(Sprite):
     def duck(self):
         self.update_sprite(self.duck_imgs, self.duck_msks, self.Y_DUCK)
 
-    def update_sprite(self, imgs, msks, new_y):
+    def update_sprite(self, imgs, msks, y):
         self.idx = (self.idx + 1) % self.m_idx
         self.image = imgs[self.idx // self.TIME_ANIMATION]
         self.mask  = msks[self.idx // self.TIME_ANIMATION]
-        self.rect  = self.image.get_rect(topleft=(self.rect.x, new_y))
+        self.rect  = self.image.get_rect(topleft=(self.x, y))
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
