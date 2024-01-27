@@ -59,6 +59,7 @@ class DinoChrome:
 
             self.dino.update(self.get_features())
             self.move_objects()
+
             self.display_main_screen()
 
     def play(self):
@@ -112,7 +113,6 @@ class DinoChrome:
 
         text = self.font.render(f'Score: {self.score}', True, BLACK)
         text_rect = text.get_rect(center=SCORE_PLAY_INDENT)
-
         self.screen.blit(text, text_rect)
 
     def update_obstacles(self):
