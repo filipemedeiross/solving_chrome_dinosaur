@@ -1,5 +1,4 @@
-from random import randint
-from pygame.image import load
+from .tools import load_image, load_images
 from .obstacle import SingleObstacle, MultiObstacle
 from .constants import SMALL_CACTUS_Y, SMALL_CACTUS_PATHS, \
                        LARGE_CACTUS_Y, LARGE_CACTUS_PATHS, \
@@ -8,17 +7,14 @@ from .constants import SMALL_CACTUS_Y, SMALL_CACTUS_PATHS, \
 
 class SmallCactus(SingleObstacle):
     def __init__(self):
-        super().__init__(load(SMALL_CACTUS_PATHS[randint(0, 1)]),
-                         SMALL_CACTUS_Y)
+        super().__init__(load_image(SMALL_CACTUS_PATHS), SMALL_CACTUS_Y)
 
 
 class LargeCactus(SingleObstacle):
     def __init__(self):
-        super().__init__(load(LARGE_CACTUS_PATHS[randint(0, 1)]),
-                         LARGE_CACTUS_Y)
+        super().__init__(load_image(LARGE_CACTUS_PATHS), LARGE_CACTUS_Y)
 
 
 class Bird(MultiObstacle):
     def __init__(self):
-        super().__init__([load(path) for path in BIRD_PATHS],
-                         BIRD_Y)
+        super().__init__(load_images(BIRD_PATHS), BIRD_Y)
