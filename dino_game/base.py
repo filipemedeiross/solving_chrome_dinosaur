@@ -1,30 +1,25 @@
 from pygame.image import load
-from .constants import SPEED_GAME, BASE_PATH
+from .constants import BASE_PATH, SPEED_GAME
 
 
 class Base:
-    SPEED = SPEED_GAME
     PATH  = BASE_PATH
+    SPEED = SPEED_GAME
 
     def __init__(self, y):
-        self.image = load(self.PATH)
+        self.x = 0
+        self.y = y
 
-        self.width = self.image.get_width()
+        self.image  = load(self.PATH)
+        self.width  = self.image.get_width()
         self.height = self.image.get_height()
 
-        self.y = y
-        self.x0 = 0
-        self.x1 = self.width
-
     def update(self):
-        self.x0 -= self.SPEED
-        self.x1 -= self.SPEED
+        self.x -= self.SPEED
 
-        if self.x0 + self.width < 0:
-            self.x0 = self.x1 + self.width
-        elif self.x1 + self.width < 0:
-            self.x1 = self.x0 + self.width
+        if self.x + self.width < 0:
+            self.x += self.width
 
-    def draw(self, screen):
-        screen.blit(self.image, (self.x0, self.y))
-        screen.blit(self.image, (self.x1, self.y))
+    def draw(self, surface):
+        surface.blit(self.image, (self.x, self.y))
+        surface.blit(self.image, (self.x + self.width, self.y))
