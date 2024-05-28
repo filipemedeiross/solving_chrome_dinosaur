@@ -12,7 +12,6 @@ class Base:
 
         self.image  = load(self.PATH)
         self.width  = self.image.get_width()
-        self.height = self.image.get_height()
 
     def update(self):
         self.x -= self.SPEED
