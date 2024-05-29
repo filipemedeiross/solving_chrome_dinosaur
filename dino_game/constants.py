@@ -1,46 +1,50 @@
-# Defining the constants
+from pygame.locals import *
+
 
 # Settings
-DELAY = 2000
-FRAMERATE  = 30
-SPEED_GAME = 20
-SPEED_ANIMATION = 5
+
+DELAY           = 2000
+FRAMERATE       =   30
+SPEED_GAME      =   20
+SPEED_ANIMATION =    5
 
 WHITE = 255, 255, 255
-BLACK = 0, 0, 0
+BLACK =   0,   0,   0
 
 FONT_TYPE = 'freesansbold.ttf'
 FONT_SIZE = 30
 
-DECISION_TREE_PATH = 'dino_game/models/dtc.pkl'
-SVM_LINEAR_PATH    = 'dino_game/models/svm_linear.pkl'
+TREE_PATH = 'dino_game/models/dtc.pkl'
+SVM_PATH  = 'dino_game/models/svm_linear.pkl'
 
 # Dimensions and indent
-SCREEN_WDTH = 1100
-SCREEN_HGHT = 600
-SCREEN_SIZE = SCREEN_WDTH, SCREEN_HGHT
 
-TEXT_INDENT = SCREEN_WDTH // 2, SCREEN_HGHT // 3
-SCORE_MAIN_INDENT = SCREEN_WDTH // 2, SCREEN_HGHT // 3 + 50
-SCORE_PLAY_INDENT = 1000, 40
+WDTH = 1100
+HGHT =  600
+SIZE = WDTH, HGHT
+
+TEXT_INDENT = WDTH // 2, HGHT // 3
+MAIN_INDENT = WDTH // 2, HGHT // 3 + 50
+PLAY_INDENT =      1000,             40
 
 # Constants of the game's classes
+
 DINO_X = 80
 DINO_Y = 310
-DINO_Y_DUCK = 340
+DINO_Y_DUCK =  340
 DINO_SPEED  = -8.5
-DINO_ACCELERATION = 0.8
+DINO_ACCEL  =  0.8
 DINO_JUMP_PATH  = 'dino_game/media/dino_jump.png'
 DINO_RUN_PATHS  = 'dino_game/media/dino_run1.png', \
                   'dino_game/media/dino_run2.png'
 DINO_DUCK_PATHS = 'dino_game/media/dino_duck1.png', \
                   'dino_game/media/dino_duck2.png'
 
-CLOUD_MIN_X = 800
+CLOUD_MIN_X =  800
 CLOUD_MAX_X = 1000
-CLOUD_MIN_Y = 50
-CLOUD_MAX_Y = 100
-CLOUD_SPEED = 15
+CLOUD_MIN_Y =   50
+CLOUD_MAX_Y =  100
+CLOUD_SPEED =   15
 CLOUD_PATH = 'dino_game/media/cloud.png'
 
 SMALL_CACTUS_Y = 325
