@@ -123,5 +123,9 @@ class Dinosaur(Sprite):
         self.rect.y = y
 
     @property
+    def right(self):
+        return self.rect.right
+
+    @property
     def topleft(self):
         return self.rect.topleft
