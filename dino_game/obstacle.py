@@ -1,13 +1,12 @@
 from pygame.sprite import Sprite
 from pygame.mask import from_surface
-from .constants import SPEED_GAME,      \
-                       SPEED_ANIMATION, \
-                       SCREEN_WDTH
+from .constants import WDTH, SPEED_GAME, \
+                       SPEED_ANIMATION
 
 
 class SingleObstacle(Sprite):
+    WIDTH = WDTH
     SPEED = SPEED_GAME
-    WIDTH = SCREEN_WDTH
 
     def __init__(self, image, y):
         Sprite.__init__(self)
@@ -17,15 +16,27 @@ class SingleObstacle(Sprite):
         self.rect  = self.image.get_rect(topleft=(self.WIDTH, y))
 
     def update(self):
-        self.rect.x -= self.SPEED
+        self.x -= self.SPEED
 
-        if self.rect.right < 0:
+        if self.right < 0:
             self.kill()
+
+    @property
+    def x(self):
+        return self.rect.x
+
+    @x.setter
+    def x(self, x):
+        self.rect.x = x
+
+    @property
+    def right(self):
+        return self.rect.right
 
 
 class MultiObstacle(Sprite):
+    WIDTH = WDTH
     SPEED = SPEED_GAME
-    WIDTH = SCREEN_WDTH
     TIME  = SPEED_ANIMATION
 
     def __init__(self, images, y):
@@ -37,9 +48,9 @@ class MultiObstacle(Sprite):
         self.update_index()
         self.update_sprite(self.idx // self.TIME, self.topleft)
 
-        self.rect.x -= self.SPEED
+        self.x -= self.SPEED
 
-        if self.rect.right < 0:
+        if self.right < 0:
             self.kill()
 
     def init_sprites(self, images, y):
@@ -59,6 +70,18 @@ class MultiObstacle(Sprite):
         self.image = self.images[idx]
         self.mask  = self.masks [idx]
         self.rect  = self.image.get_rect(topleft=topleft)
+
+    @property
+    def x(self):
+        return self.rect.x
+
+    @x.setter
+    def x(self, x):
+        self.rect.x = x
+
+    @property
+    def right(self):
+        return self.rect.right
 
     @property
     def topleft(self):

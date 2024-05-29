@@ -3,17 +3,17 @@ from pygame.image import load
 from .constants import CLOUD_PATH , CLOUD_SPEED, \
                        CLOUD_MIN_X, CLOUD_MAX_X, \
                        CLOUD_MIN_Y, CLOUD_MAX_Y, \
-                       SCREEN_WDTH
+                       WDTH
 
 
 class Cloud:
+    WIDTH = WDTH
     PATH  = CLOUD_PATH
     SPEED = CLOUD_SPEED
     MIN_X = CLOUD_MIN_X
     MAX_X = CLOUD_MAX_X
     MIN_Y = CLOUD_MIN_Y
     MAX_Y = CLOUD_MAX_Y
-    WIDTH = SCREEN_WDTH
 
     def __init__(self):
         self.init_coords()
