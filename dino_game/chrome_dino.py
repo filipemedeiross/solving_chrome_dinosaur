@@ -1,4 +1,8 @@
 import pygame
+from pygame.sprite import Group,           \
+                          collide_mask,    \
+                          spritecollideany
+
 from pickle import load
 from random import choice, \
                    randint
@@ -37,52 +41,49 @@ class DinoChrome:
         self.cloud = Cloud()
         self.dino  = Dinosaur()
         self.base  = Base(BASE_Y)
-        self.obstacles = pygame.sprite.Group()
+        self.obstacles = Group()
 
     def init_game(self):
         while True:
             self.main_screen()
             self.play()
 
-    def main_screen(self):#
+    def main_screen(self):
         self.play_theme()
 
         while True:
-            self.clock.tick(FRAMERATE)
-
-            # Getting input from user
             for event in pygame.event.get():
                 if event.type == QUIT:
                     exit(0)
                 if event.type == KEYDOWN:
-                    return            
+                    return
 
-            self.dino.update(self.get_features())
-            self.move_objects()
+            moves = self.features
 
+            self.move_objects(moves)
             self.display_main_screen()
 
-    def play(self):#
+            self.clock.tick(FRAMERATE)
+
+    def play(self):
         self.score = 0
 
         while True:
-            self.clock.tick(FRAMERATE)
-
             for event in pygame.event.get():
                 if event.type == QUIT:
                     exit(0)
 
-            self.dino.update(pygame.key.get_pressed())
-            self.move_objects()
+            moves = pygame.key.get_pressed()
 
+            self.move_objects(moves)
             self.display_play_screen()
 
-            if self.collide(self.dino, self.obstacles):
-                self.play_lose_effect()
-                pygame.time.delay(DELAY)
+            if self.check_lose():
                 return
 
-    def display_main_screen(self):#
+            self.clock.tick(FRAMERATE)
+
+    def display_main_screen(self):
         self.screen.fill(WHITE)
 
         self.draw_objects()
@@ -90,7 +91,7 @@ class DinoChrome:
 
         pygame.display.flip()
 
-    def display_play_screen(self):#
+    def display_play_screen(self):
         self.screen.fill(WHITE)
 
         self.draw_objects()
@@ -98,48 +99,57 @@ class DinoChrome:
 
         pygame.display.flip()
 
-    def display_text(self):#
-        text = self.font.render('Press any Key to Start', True, BLACK)    
-        text_rect = text.get_rect(center=TEXT_INDENT)
-        self.screen.blit(text, text_rect)
+    def display_text(self):
+        text = self.font.render('Press Any Key to Start', True, BLACK)
+        rect = text.get_rect(center=TEXT_INDENT)
+
+        self.screen.blit(text, rect)
 
         if self.score:
             score = self.font.render(f'Your Score: {self.score}', True, BLACK)
-            score_rect = score.get_rect(center=(SCORE_MAIN_INDENT))
-            self.screen.blit(score, score_rect)
+            rect  = score.get_rect(center=(MAIN_INDENT))
 
-    def display_score(self):#
+            self.screen.blit(score, rect)
+
+    def display_score(self):
         self.score += 1
 
         text = self.font.render(f'Score: {self.score}', True, BLACK)
-        text_rect = text.get_rect(center=SCORE_PLAY_INDENT)
-        self.screen.blit(text, text_rect)
+        rect = text.get_rect(center=PLAY_INDENT)
 
-    def update_obstacles(self):#
+        self.screen.blit(text, rect)
+
+    def update_obstacles(self):
         if not self.obstacles:
             op = randint(0, 2)
-            if op == 0:
+
+            if   op == 0:
                 self.obstacles.add(SmallCactus())
             elif op == 1:
                 self.obstacles.add(LargeCactus())
             elif op == 2:
                 self.obstacles.add(Bird())
 
-    def move_objects(self):#
-        self.cloud.update()
+    def move_objects(self, moves):
         self.base.update()
+        self.cloud.update()
+        self.dino.update(moves)
+
         self.update_obstacles()
+
         self.obstacles.update()
 
-    def draw_objects(self):#
+    def draw_objects(self):
         self.base.draw(self.screen)
         self.cloud.draw(self.screen)
         self.obstacles.draw(self.screen)
         self.dino.draw(self.screen)
 
-    @staticmethod
-    def collide(sprite, group):#
-        return pygame.sprite.spritecollideany(sprite, group, collided=pygame.sprite.collide_mask)
+    def check_lose(self):
+        if self.collide(self.dino, self.obstacles):
+            self.play_lose_effect()
+
+            return True
 
     def play_theme(self):
         if not self.channel_music.get_busy():
@@ -148,6 +158,8 @@ class DinoChrome:
     def play_lose_effect(self):
         self.channel_music.stop()
         self.channel_effct.play(self.music_lose)
+
+        pygame.time.delay(DELAY)
 
     def load_agent(self):
         path = choice([TREE_PATH, SVM_PATH])
@@ -158,7 +170,8 @@ class DinoChrome:
     def predict(self, x, obs):
         return self.agent.predict([[x, obs]])[0]
 
-    def get_features(self):
+    @property
+    def features(self):
         features = {K_UP   : False,
                     K_DOWN : False}
 
@@ -173,6 +186,10 @@ class DinoChrome:
                 features[K_DOWN] = True
 
         return features
+
+    @staticmethod
+    def collide(sprite, group):
+        return spritecollideany(sprite, group, collided=collide_mask)
 
     @staticmethod
     def is_cactus(obs):
